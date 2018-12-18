@@ -1,1 +1,2 @@
-export default 'Hello, World!';
+// eslint-disable-next-line import/prefer-default-export
+export { default as createAction } from './create-action';

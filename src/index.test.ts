@@ -1,5 +1,8 @@
-import mod from '.';
+import createAction from './create-action';
+import * as mod from '.';
 
-test('module', () => {
-  expect(mod).toBe('Hello, World!');
+test('module exports', () => {
+  expect(mod).toEqual({
+    createAction,
+  });
 });
