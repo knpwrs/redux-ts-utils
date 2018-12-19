@@ -9,7 +9,8 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Badges](https://img.shields.io/badge/badges-8-orange.svg)](http://shields.io/)
 
-Everything you need to create type-safe applications with Redux!
+Everything you need to create type-safe applications with Redux! [Flux Standard
+Action][FSA] compliant.
 
 ## Example Usage
 
@@ -175,15 +176,23 @@ safety.
 
 ### A Note on Flux Standard Actions
 
-This library does not implement [Flux Standard Actions][fsa]. Flux standard
-actions are a pain to use when you want to emphasize type safety in your
-project. The always-polymorphic typing of the `payload` property means you're
-constantly checking if you have an `Error` or whatever type your `payload` is
-for the typical case. The best way to handle errors with this library is to
-either create separate error action creators or to type your action creators to
-optionally take an error object (in which case you will need to check the type
-of the payload property, this library will not set an `error` boolean for you
-since the emphasis is on build-time type safety).
+This library is compliant with [Flux Standard Actions][FSA]. That said, there
+is one important distinction with the way this library is typed that you should
+take note of of.
+
+First, the [FSA] docs state that the `payload` property is optional and _may_
+have a value. This makes reducers a pain to write because TypeScript will
+enforce that you always check for the existence of the payload property in
+order to use the resulting actions. If you want to create an action that
+doesn't require a payload, the simplest (and most type-explicit) thing to do
+is to type the payload as `void`:
+
+```ts
+const myAction = createAction<void>('MY_ACTION');
+```
+
+Even with this particular distinction, the actions created by this library are
+[FSA]-compliant.
 
 ## Development Mode
 
@@ -195,9 +204,9 @@ two action creators with the same `type`.
 
 **MIT**
 
+[FSA]: https://github.com/redux-utilities/flux-standard-action
 [`immer`]: https://github.com/mweststrate/immer "Create the next immutable state by mutating the current one"
 [`redux-starter-kit`]: https://www.npmjs.com/package/redux-starter-kit
-[fsa]: https://github.com/redux-utilities/flux-standard-action
 [observables]: https://github.com/redux-observable/redux-observable
 [promises]: https://github.com/redux-utilities/redux-promise
 [sagas]: https://github.com/redux-saga/redux-saga
