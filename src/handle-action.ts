@@ -17,7 +17,7 @@ export default function handleAction<S, AC extends TsActionCreator<any> = any>(
   s?: S,
 ): Reducer<S, ReturnType<AC>> {
   return produce((draft: Draft<S>, action: ReturnType<AC>) => {
-    if (action.type === ac.toString()) {
+    if (action.type === ac.type) {
       re(draft, action.payload);
     }
   }, s);

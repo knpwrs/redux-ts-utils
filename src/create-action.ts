@@ -7,6 +7,7 @@ export interface TsAction<T> extends Action<string> {
 
 export interface TsActionCreator<T, A extends any[] = [T?]> {
   (...args: A): TsAction<T>;
+  type: string;
 }
 
 export type PayloadCreator<P, A extends any[] = [P?]> = (...args: A) => P;
@@ -32,11 +33,15 @@ export default <P, A extends any[] = [P?]>(
     }
     debugTypeMap[type] = true;
   }
+
   // Continue with creating an action creator
   const ac = (...args: any[]): TsAction<P> => ({
     type,
     payload: pc(...args as A),
   });
+
+  ac.type = type;
   ac.toString = () => type;
+
   return ac;
 };
