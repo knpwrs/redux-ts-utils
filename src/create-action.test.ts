@@ -107,29 +107,3 @@ test('toString', () => {
   expect(ac.type).toBe('foo6');
   expect(ac.toString()).toBe('foo6');
 });
-
-const setNodeEnv = (env: string) => {
-  const old = process.env.NODE_ENV;
-  process.env.NODE_ENV = env;
-  return () => {
-    process.env.NODE_ENV = old;
-  };
-};
-
-test('does not allow colliding action types in development', () => {
-  // Development
-  expect(() => {
-    const reset = setNodeEnv('development');
-    createAction<string>('banana');
-    createAction<string>('banana');
-    reset();
-  }).toThrowError(/DUPLICATE/);
-
-  // Production
-  expect(() => {
-    const reset = setNodeEnv('production');
-    createAction<string>('banana');
-    createAction<string>('banana');
-    reset();
-  }).not.toThrowError(/DUPLICATE/);
-});

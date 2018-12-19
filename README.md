@@ -207,12 +207,6 @@ const myAction = createAction<void>('MY_ACTION');
 Even with this particular distinction, the actions created by this library are
 [FSA]-compliant.
 
-## Development Mode
-
-In development mode (whenever `process.env.NODE_ENV` is not set to
-`'production'`) the `createAction` function will throw an error if you create
-two action creators with the same `type`.
-
 ## License
 
 **MIT**
