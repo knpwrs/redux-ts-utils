@@ -16,8 +16,8 @@ test('all together (type handle)', () => {
     handleAction<typeof state>(dec, (draft) => {
       draft.counter -= 1;
     }),
-    handleAction<typeof state>(add, (draft, num) => {
-      draft.counter += num;
+    handleAction<typeof state>(add, (draft, { payload }) => {
+      draft.counter += payload;
     }),
   ], state);
   const actions = [inc(), dec(), dec(), inc(), inc(), add(5)];
@@ -36,8 +36,8 @@ test('all together (type reducers)', () => {
     handleAction(dec, (draft: Draft<typeof state>) => {
       draft.counter -= 1;
     }),
-    handleAction(add, (draft: Draft<typeof state>, num) => {
-      draft.counter += num;
+    handleAction(add, (draft: Draft<typeof state>, { payload }) => {
+      draft.counter += payload;
     }),
   ], state);
   const actions = [inc(), dec(), dec(), inc(), inc(), add(5)];
@@ -57,8 +57,8 @@ test('all together (type reduceReducers)', () => {
     handleAction(dec, (draft) => {
       draft.counter -= 1;
     }),
-    handleAction(add, (draft, num) => {
-      draft.counter += num;
+    handleAction(add, (draft, { payload }) => {
+      draft.counter += payload;
     }),
   ], state);
   const actions = [inc(), dec(), dec(), inc(), inc(), add(5)];

@@ -9,7 +9,7 @@ import {
 
 export { Draft } from 'immer';
 
-export type TsReducer<S, A extends TsAction<any>> = (s: Draft<S>, p: A['payload']) => void;
+export type TsReducer<S, A extends TsAction<any>> = (s: Draft<S>, p: A) => void;
 
 export default function handleAction<S, AC extends TsActionCreator<any> = any>(
   ac: AC,
@@ -18,7 +18,7 @@ export default function handleAction<S, AC extends TsActionCreator<any> = any>(
 ): Reducer<S, ReturnType<AC>> {
   return produce((draft: Draft<S>, action: ReturnType<AC>) => {
     if (action.type === ac.type) {
-      re(draft, action.payload);
+      re(draft, action);
     }
   }, s);
 }

@@ -26,8 +26,8 @@ const reducer = reduceReducers<State>([
   handleAction(decrement, (state) => {
     state.counter -= 1;
   }),
-  handleAction(add, (state, num) => {
-    state.counter += num;
+  handleAction(add, (state, { payload }) => {
+    state.counter += payload;
   }),
 ], initialState);
 

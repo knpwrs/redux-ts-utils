@@ -18,7 +18,7 @@ test('handles specific action with payload', () => {
   const ac1 = createAction<{ num: number }>('foo2');
   const ac2 = createAction<{ num: number }>('bar2');
   const state: { readonly counter: number } = { counter: 0 };
-  const re = handleAction<typeof state>(ac1, (draft, payload) => {
+  const re = handleAction<typeof state>(ac1, (draft, { payload }) => {
     draft.counter += payload.num;
   }, state);
   expect(re(state, ac1({ num: 10 }))).toEqual({ counter: 10 });
