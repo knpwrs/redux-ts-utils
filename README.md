@@ -79,6 +79,9 @@ npm install
 npm run example
 ```
 
+There is also an [example React app][ex] available on GitHub which you can also
+see [running on CodeSandbox][cs].
+
 ## API
 
 This package exports a grand total of three functions.
@@ -214,6 +217,8 @@ Even with this particular distinction, the actions created by this library are
 [FSA]: https://github.com/redux-utilities/flux-standard-action
 [`immer`]: https://github.com/mweststrate/immer "Create the next immutable state by mutating the current one"
 [`redux-starter-kit`]: https://www.npmjs.com/package/redux-starter-kit
+[cs]: https://codesandbox.io/s/github/knpwrs/redux-ts-utils-example-app
+[ex]: https://github.com/knpwrs/redux-ts-utils-example-app
 [observables]: https://github.com/redux-observable/redux-observable
 [promises]: https://github.com/redux-utilities/redux-promise
 [sagas]: https://github.com/redux-saga/redux-saga
