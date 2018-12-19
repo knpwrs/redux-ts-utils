@@ -9,7 +9,7 @@
     "commitmsg": "commitlint -E HUSKY_GIT_PARAMS",
     "prebuild": "npm run test",
     "build": "npm run build:commonjs && npm run build:es",
-    "build:commonjs": "tsc --outDir dist/common --target es5",
+    "build:commonjs": "tsc --outDir dist/commonjs --target es5",
     "build:es": "tsc --outDir dist/es",
     "clean": "rimraf dist",
     "example": "ts-node ./src/example",
