@@ -142,10 +142,8 @@ Whenever possible it is best to maintain strong safety; however, this can lead
 to extremely verbose code. For that reason this library strongly encourages
 type inference whenever possible.
 
-This library exports three functions and one type (which you probably don't
-even need to import, `Draft` is provided purely for convenience) and everything
-you need is provided by one package. The API surface is very small and easy to
-grok.
+This library exports three functions and one type and everything you need is
+provided by one package. The API surface is very small and easy to grok.
 
 ### Not Too Opinionated
 
