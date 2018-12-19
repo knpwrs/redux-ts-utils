@@ -196,12 +196,12 @@ This library is compliant with [Flux Standard Actions][FSA]. That said, there
 is one important distinction with the way this library is typed that you should
 take note of of.
 
-First, the [FSA] docs state that the `payload` property is optional and _may_
-have a value. This makes reducers a pain to write because TypeScript will
-enforce that you always check for the existence of the payload property in
-order to use the resulting actions. If you want to create an action that
-doesn't require a payload, the simplest (and most type-explicit) thing to do
-is to type the payload as `void`:
+The [FSA] docs state that the `payload` property is optional and _may_ have a
+value. This makes reducers a pain to write because TypeScript will enforce that
+you always check for the existence of the payload property in order to use the
+resulting actions. If you want to create an action that doesn't require a
+payload, the simplest (and most type-explicit) thing to do is to type the
+payload as `void`:
 
 ```ts
 const myAction = createAction<void>('MY_ACTION');
