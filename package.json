@@ -39,7 +39,8 @@
   "keywords": [
     "redux",
     "typescript",
-    "utilities"
+    "utilities",
+    "immer"
   ],
   "author": "Kenneth Powers <ken@kenpowers.net> (https://knpw.rs)",
   "license": "MIT",
