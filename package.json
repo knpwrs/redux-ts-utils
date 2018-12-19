@@ -1,6 +1,6 @@
 {
   "name": "redux-ts-utils",
-  "version": "1.0.1",
+  "version": "2.0.0-0",
   "description": "Everything you need to create type-safe applications with Redux!",
   "main": "dist/commonjs/index.js",
   "module": "dist/es/index.js",
