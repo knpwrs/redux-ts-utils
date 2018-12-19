@@ -79,8 +79,10 @@ npm run example
 
 ## API
 
+This package exports a grand total of three functions.
+
 A lot of the generics for these functions can be inferred (see above example).
-The typings provided are optimized for readability.
+The typings below provided are optimized for readability.
 
 ### `createAction<T, A extends any[] = [T?]>(type: string, payloadCreator?(args: A) => T)`
 
