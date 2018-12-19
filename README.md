@@ -42,8 +42,8 @@ const reducer = reduceReducers<State>([
   handleAction(decrement, (state) => {
     state.counter -= 1;
   }),
-  handleAction(add, (state, num) => {
-    state.counter += num;
+  handleAction(add, (state, { payload }) => {
+    state.counter += payload;
   }),
 ], initialState);
 
@@ -129,8 +129,7 @@ const addThreeNumbers = createAction<number, [number, number, number], number>(
 The `handleAction` function returns a single reducer function. The first
 argument should be an action creator from the `createAction` function. The
 second argument should be a "mutation" function which takes the current state
-and the payload from the action. The third argument is an optional initial
-state argument.
+and the action. The third argument is an optional initial state argument.
 
 When provided with an action with a type that matches the type from
 `actionCreator` the mutation function will be run. The mutation function is
