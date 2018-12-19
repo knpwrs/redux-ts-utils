@@ -18,6 +18,7 @@ const identity = <T extends any[]>(...arg: T): T[0] => arg[0];
 // As long as we're in development mode we will store already-created action
 // types for debug purposes.
 let debugTypeMap: { [key: string]: true };
+// istanbul ignore next
 if (process.env.NODE_ENV !== 'production') {
   debugTypeMap = {};
 }

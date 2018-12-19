@@ -4,10 +4,11 @@
 [![devDependency Status](https://img.shields.io/david/dev/knpwrs/redux-ts-utils.svg)](https://david-dm.org/knpwrs/redux-ts-utils#info=devDependencies)
 [![Greenkeeper badge](https://badges.greenkeeper.io/knpwrs/redux-ts-utils.svg)](https://greenkeeper.io/)
 [![Build Status](https://img.shields.io/travis/knpwrs/redux-ts-utils.svg)](https://travis-ci.org/knpwrs/redux-ts-utils)
+[![Coverage](https://img.shields.io/codecov/c/github/knpwrs/redux-ts-utils.svg)](https://codecov.io/gh/knpwrs/redux-ts-utils)
 [![Npm Version](https://img.shields.io/npm/v/redux-ts-utils.svg)](https://www.npmjs.com/package/redux-ts-utils)
 [![TypeScript 3](https://img.shields.io/badge/TypeScript-3-blue.svg)](http://shields.io/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Badges](https://img.shields.io/badge/badges-8-orange.svg)](http://shields.io/)
+[![Badges](https://img.shields.io/badge/badges-9-orange.svg)](http://shields.io/)
 
 Everything you need to create type-safe applications with Redux! [Flux Standard
 Action][FSA] compliant.

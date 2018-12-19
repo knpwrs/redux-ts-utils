@@ -4,7 +4,7 @@ node_js:
   - '10'
   - '9'
   - '8'
-  - '7'
-  - '6'
   - 'stable'
-script: npm run build
+script:
+  - npm run build
+  - npx codecov
