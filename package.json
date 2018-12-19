@@ -12,7 +12,9 @@
     "build:commonjs": "tsc --outDir dist/common --target es5",
     "build:es": "tsc --outDir dist/es",
     "clean": "rimraf dist",
+    "example": "ts-node ./src/example",
     "lint": "eslint --ext ts src/**/*",
+    "pretest": "npm run example",
     "test": "jest",
     "test:watch": "jest --watch",
     "posttest": "npm run lint",
@@ -55,7 +57,7 @@
     "@commitlint/cli": "^7.2.1",
     "@commitlint/config-conventional": "^7.1.2",
     "@types/jest": "^23.3.10",
-    "@types/node": "^10.12.12",
+    "@types/node": "^10.12.17",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
@@ -66,6 +68,7 @@
     "redux": "^4.0.1",
     "rimraf": "^2.6.2",
     "ts-jest": "^23.10.5",
+    "ts-node": "^7.0.1",
     "typescript": "^3.2.1",
     "typescript-eslint-parser": "^21.0.2"
   }
