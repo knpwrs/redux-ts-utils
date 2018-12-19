@@ -131,22 +131,47 @@ input reducers in sequence.
 
 ## Design Philosophy
 
+### A Strong Emphasis on Type Safety
+
+Nothing should be stringly-typed. If you make a breaking change anywhere in
+your data layer the compiler should complain.
+
+### Simplicity
+
+Whenever possible it is best to maintain strong safety; however, this can lead
+to extremely verbose code. For that reason this library strongly encourages
+type inference whenever possible.
+
+This library exports three functions and one type (which you probably don't
+even need to import, `Draft` is provided purely for convenience) and everything
+you need is provided by one package. The API surface is very small and easy to
+grok.
+
+### Not Too Opinionated
+
 `redux-ts-utils` provides TypeScript-friendly abstractions over the most
-commonly-repeated pieces of boilerplate present in Redux projects. It does not
-dictate or abstract how you write your selectors, how you handle asynchronous
-actions or side effects, how you create your store, or any other aspect of how
-you use redux.  This makes `redux-ts-utils` very non-opinionated compared to
-other Redux utility libraries. The closest thing to an opinion you will find in
-this library is that it ships with [`immer`]. The reason for this is that
-[`immer`] has proven to be the best method for dealing with immutable data
-structures in a way which is both type-safe and performant.
+commonly-repeated pieces of boilerplate present in Redux projects. It is not a
+complete framework abstracting all of Redux. It does not dictate or abstract
+how you write your selectors, how you handle asynchronous actions or side
+effects, how you create your store, or any other aspect of how you use Redux.
+This makes `redux-ts-utils` very non-opinionated compared to other Redux
+utility libraries. The closest thing to an opinion you will find in this
+library is that it ships with [`immer`]. The reason for this is that [`immer`]
+has proven to be the best method for dealing with immutable data structures in
+a way which is both type-safe and performant. On top of that, [`immer`], by its
+inclusion in [`redux-starter-kit`], has effectively been officially endorsed as
+the de facto solution for managing immutable state changes. Shipping with
+[`immer`] helps to maintain the goal of [simplicity](#simplicity) by reducing
+the necessary API surface for writing reducers and by ensuring type inference
+whenever possible.
 
 Setting up a redux store and middleware is typically a one-time task per
 project, so this library does not provide an abstraction for that. Likewise,
-[thunks] are simple but [sagas] are powerful, you should choose what works best
-for your project. Finally, given this library's strong emphasis on type safety
-it doesn't necessarily make sense to provide abstractions for creating
-selectors at the expense of type safety.
+[thunks] are simple but [sagas] are powerful, or maybe you like [promises] or
+[observables]. You should choose what works best for your project. Finally,
+given this library's strong emphasis on type safety it doesn't necessarily make
+sense to provide abstractions for creating selectors at the expense of type
+safety.
 
 ### A Note on Flux Standard Actions
 
@@ -171,6 +196,9 @@ two action creators with the same `type`.
 **MIT**
 
 [`immer`]: https://github.com/mweststrate/immer "Create the next immutable state by mutating the current one"
-[thunks]: https://github.com/reduxjs/redux-thunk
-[sagas]: https://github.com/redux-saga/redux-saga
+[`redux-starter-kit`]: https://www.npmjs.com/package/redux-starter-kit
 [fsa]: https://github.com/redux-utilities/flux-standard-action
+[observables]: https://github.com/redux-observable/redux-observable
+[promises]: https://github.com/redux-utilities/redux-promise
+[sagas]: https://github.com/redux-saga/redux-saga
+[thunks]: https://github.com/reduxjs/redux-thunk
