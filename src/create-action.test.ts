@@ -17,6 +17,13 @@ test('creates actions with untyped identity payload creator', () => {
   });
 });
 
+test('creates actions with void identity payload creator', () => {
+  const ac = createAction<void>('void-action');
+  expect(ac()).toEqual({
+    type: 'void-action',
+  });
+});
+
 test('creates actions with explicit payload creator', () => {
   const ac = createAction<string, [number]>('foo3', num => `${num}`);
   expect(ac(4)).toEqual({
