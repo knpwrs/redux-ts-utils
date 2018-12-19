@@ -111,6 +111,19 @@ is typed as you can provide types in the generic signature:
 const addThreeNumbers = createAction<number, [number, number, number]>('ADD_THREE_NUMBERS', (a, b, c) => a + b + c);
 ```
 
+If you need to customize the [SFP] `meta` property you can supply a second meta
+customizer function:
+
+```ts
+const addThreeNumbers = createAction<number, [number, number, number], number>(
+  'ADD_THREE_NUMBERS',
+  // Create `payload`
+  (a, b, c) => a + b + c,
+  // Create `meta`
+  (a, b, c) => `${a} + ${b} + ${c}`,
+);
+```
+
 ### `handleAction(actionCreator, (state: Draft<State>, payload) => void, initialState?: State)`
 
 The `handleAction` function returns a single reducer function. The first
