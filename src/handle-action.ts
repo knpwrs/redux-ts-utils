@@ -16,9 +16,9 @@ export default function handleAction<S, AC extends TsActionCreator<any> = any>(
   re: TsReducer<S, ReturnType<AC>>,
   s?: S,
 ): Reducer<S, ReturnType<AC>> {
-  return produce((draft: Draft<S>, action: ReturnType<AC>) => {
+  return produce<S, Draft<S>, [ReturnType<AC>]>((draft, action) => {
     if (action.type === ac.type) {
       re(draft, action);
     }
-  }, s);
+  }, s as S) as any; // see https://github.com/mweststrate/immer/issues/289
 }
