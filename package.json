@@ -52,7 +52,7 @@
     "redux": "^4.0.1"
   },
   "dependencies": {
-    "immer": "^1.10.3"
+    "immer": "^2.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.2.1",
