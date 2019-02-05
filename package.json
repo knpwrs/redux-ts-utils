@@ -66,7 +66,7 @@
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "husky": "^1.2.0",
-    "jest": "^23.6.0",
+    "jest": "^24.1.0",
     "np": "^4.0.2",
     "redux": "^4.0.1",
     "rimraf": "^2.6.2",
