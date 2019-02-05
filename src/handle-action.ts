@@ -28,9 +28,9 @@ export default function handleAction<S, AC extends TsActionCreator<any> = any>(
 
       if (finishedDraft === state && reResult !== undefined) {
         return reResult;
-      } else {
-        return finishedDraft;
       }
+
+      return finishedDraft;
     }
     return (state || s) as any;
   };
