@@ -1,5 +1,9 @@
 import { Reducer } from 'redux';
-import { Draft, produce } from 'immer';
+import {
+  Draft,
+  createDraft,
+  finishDraft,
+} from 'immer';
 import {
   // eslint-disable-next-line no-unused-vars
   TsActionCreator,
@@ -16,9 +20,12 @@ export default function handleAction<S, AC extends TsActionCreator<any> = any>(
   re: TsReducer<S, ReturnType<AC>>,
   s?: S,
 ): Reducer<S, ReturnType<AC>> {
-  return produce((draft: Draft<S>, action: ReturnType<AC>) => {
-    if (action.type === ac.type) {
+  return (state: S | undefined, action: ReturnType<AC>) => {
+    if (action.type === ac.type && state) {
+      const draft = createDraft(state);
       re(draft, action);
+      return finishDraft(draft);
     }
-  }, s) as any; // see https://github.com/mweststrate/immer/issues/289
+    return (state || s) as any;
+  };
 }
