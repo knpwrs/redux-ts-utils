@@ -1,21 +1,25 @@
-extends: airbnb-base
-parser: typescript-eslint-parser
+extends:
+  - airbnb-base
+  - 'plugin:@typescript-eslint/recommended'
+parser: '@typescript-eslint/parser'
 plugins:
-  - typescript
+  - '@typescript-eslint'
 settings:
   import/resolver:
     node:
       extensions:
         - .ts
   import/parsers:
-    typescript-eslint-parser: [.ts]
+    '@typescript-eslint/parser': [.ts]
 rules:
   no-undef: off
   space-infix-ops: off
   import/extensions: [error, ignorePackages, {
     js: never,
   }]
-  typescript/no-unused-vars: error
+  import/named: off
+  '@typescript-eslint/indent': off
+  '@typescript-eslint/no-explicit-any': off
 overrides:
   - files: '**/*.test.ts'
     rules:

@@ -11,9 +11,9 @@ const add = createAction<number>('add');
 
 // Reducer
 
-type State = {
-  readonly counter: number,
-};
+interface State {
+  readonly counter: number;
+}
 
 const initialState: State = {
   counter: 0,
