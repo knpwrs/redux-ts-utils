@@ -18,7 +18,7 @@ rules:
     js: never,
   }]
   import/named: off
-  '@typescript-eslint/indent': off
+  '@typescript-eslint/indent': [error, 2]
   '@typescript-eslint/no-explicit-any': off
 overrides:
   - files: '**/*.test.ts'
