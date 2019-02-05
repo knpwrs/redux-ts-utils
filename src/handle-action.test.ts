@@ -10,8 +10,12 @@ test('handles specific action', () => {
   const re = handleAction<typeof state>(ac1, (draft) => {
     draft.counter += 1;
   }, state);
-  expect(re(state, ac1())).toEqual({ counter: 1 });
-  expect(re(state, ac2())).toEqual({ counter: 0 });
+  const newState1 = re(state, ac1());
+  expect(newState1).toEqual({ counter: 1 });
+  expect(newState1).not.toBe(state);
+  const newState2 = re(state, ac2());
+  expect(newState2).toEqual({ counter: 0 });
+  expect(newState2).toBe(state);
 });
 
 test('handles specific action with payload', () => {
@@ -21,6 +25,10 @@ test('handles specific action with payload', () => {
   const re = handleAction<typeof state>(ac1, (draft, { payload }) => {
     draft.counter += payload.num;
   }, state);
-  expect(re(state, ac1({ num: 10 }))).toEqual({ counter: 10 });
-  expect(re(state, ac2({ num: 10 }))).toEqual({ counter: 0 });
+  const newState1 = re(state, ac1({ num: 10 }));
+  expect(newState1).toEqual({ counter: 10 });
+  expect(newState1).not.toBe(state);
+  const newState2 = re(state, ac2({ num: 10 }));
+  expect(newState2).toEqual({ counter: 0 });
+  expect(newState2).toBe(state);
 });
