@@ -8,6 +8,7 @@ import { createAction, handleAction, reduceReducers } from '.';
 const increment = createAction<void>('increment');
 const decrement = createAction<void>('decrement');
 const add = createAction<number>('add');
+const override = createAction<number>('override');
 
 // Reducer
 
@@ -29,6 +30,9 @@ const reducer = reduceReducers<State>([
   handleAction(add, (state, { payload }) => {
     state.counter += payload;
   }),
+  handleAction(override, (_, { payload }) => ({
+    counter: payload,
+  })),
 ], initialState);
 
 // Store
