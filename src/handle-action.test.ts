@@ -32,3 +32,35 @@ test('handles specific action with payload', () => {
   expect(newState2).toEqual({ counter: 0 });
   expect(newState2).toBe(state);
 });
+
+test('handles specific action with payload by returning value directly', () => {
+  const ac1 = createAction<{ num: number }>('foo3');
+  const state: { readonly counter: number } = { counter: 0 };
+  const re = handleAction<typeof state>(ac1, (draft, { payload }) => ({
+    counter: draft.counter + payload.num,
+  }), state);
+  const newState1 = re(state, ac1({ num: 7 }));
+  expect(newState1).toEqual({ counter: 7 });
+  expect(newState1).not.toBe(state);
+});
+
+test('handles specific action with payload and ignores directly returned value if draft is mutated', () => {
+  const ac1 = createAction<{ num: number }>('foo4');
+  const state: { readonly counter: number } = { counter: 0 };
+  const re = handleAction<typeof state>(ac1, (draft, { payload }) => {
+    draft.counter += payload.num;
+    return 'unintended return value';
+  }, state);
+  const newState1 = re(state, ac1({ num: 10 }));
+  expect(newState1).toEqual({ counter: 10 });
+  expect(newState1).not.toBe(state);
+});
+
+test('handles specific action and uses previous state if directly return value is undefined', () => {
+  const ac1 = createAction<void>('foo5');
+  const state: { readonly baz: number } = { baz: 0 };
+  const re = handleAction<typeof state>(ac1, () => undefined, state);
+  const newState1 = re(state, ac1());
+  expect(newState1).toEqual({ baz: 0 });
+  expect(newState1).toBe(state);
+});

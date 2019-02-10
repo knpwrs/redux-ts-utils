@@ -23,8 +23,14 @@ export default function handleAction<S, AC extends TsActionCreator<any> = any>(
   return (state: S | undefined, action: ReturnType<AC>) => {
     if (action.type === ac.type && state) {
       const draft = createDraft(state);
-      re(draft, action);
-      return finishDraft(draft);
+      const reResult = re(draft, action);
+      const finishedDraft = finishDraft(draft);
+
+      if (finishedDraft === state && reResult !== undefined) {
+        return reResult;
+      }
+
+      return finishedDraft;
     }
     return (state || s) as any;
   };

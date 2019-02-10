@@ -24,6 +24,7 @@ import { createAction, handleAction, reduceReducers } from 'redux-ts-utils';
 const increment = createAction<void>('increment');
 const decrement = createAction<void>('decrement');
 const add = createAction<number>('add');
+const override = createAction<number>('override');
 
 // Reducer
 
@@ -45,6 +46,9 @@ const reducer = reduceReducers<State>([
   handleAction(add, (state, { payload }) => {
     state.counter += payload;
   }),
+  handleAction(override, (_, { payload }) => ({
+    counter: payload,
+  })),
 ], initialState);
 
 // Store
@@ -141,6 +145,9 @@ the incoming state object and return the optimally-immutably-updated new state
 object. [`immer`] will also provide you with a mapped type (`Draft`) of your
 state with all `readonly` modifiers removed (it will also remove `Readonly`
 mapped types and convert `ReadonlyArray`s to standard arrays).
+
+If your mutation function returns a value other than `undefined`, and does not mutate the
+incoming state object, that return value will become the new state instead.
 
 ### `reduceReducers<S>(reducers: Reducer[], initialState?: S)`
 
