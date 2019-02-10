@@ -88,7 +88,7 @@ see [running on CodeSandbox][cs].
 
 ## API
 
-This package exports a grand total of three functions.
+This package exports a grand total of four functions.
 
 A lot of the generics for these functions can be inferred (see above example).
 The typings below provided are optimized for readability.
@@ -154,6 +154,39 @@ incoming state object, that return value will become the new state instead.
 The `reduceReducers` function takes an array of reducer functions and an
 optional initial state value and returns a single reducer which runs all of the
 input reducers in sequence.
+
+### `createAsyncActions<T, A extends any[], ...>(type: string, startPayloadCreator, successPayloadCreator, failPayloadCreator)`
+
+Oftentimes when working with sagas, thunks, or some other asynchronous,
+side-effecting middleware you need to create three actions which are named
+similarly. This is a convenience function which calls `createAction` three
+times for you. Consider the following example:
+
+```ts
+import { noop } from 'lodash';
+import { createAsyncActions } from 'redux-ts-utils';
+
+type User = { name: string };
+
+export const [
+  requestUsers,
+  requestUsersSuccess,
+  requestUsersFailure,
+] = createAsyncActions('REQUEST_USERS', noop, (users: User[]) => users);
+
+requestUsers(); // returns action of type `REQUEST_USERS`
+requestUsersSuccess([{ name: 'knpwrs' }]); // returns action of type `REQUEST_USERS/SUCCESS`
+requestUsersError(); // returns action of type `REQUEST_USERS/ERROR`
+```
+
+The first argument is the action/triad name, and the second through third
+(optional) arguments are payload creators for the initial action, the success
+action, and the error action, respectively. `noop` is imported from lodash in
+order to be explicit that in this case the payload for `requestUsers` is
+`void`. You can just as easily use `() => {}` inline. The action creators infer
+their payload types from the supplied payload creators. See [the
+implementation](./src/create-async-actions.ts) for complete type information.
+
 
 ## Design Philosophy
 

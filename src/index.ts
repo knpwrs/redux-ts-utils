@@ -4,6 +4,7 @@ export {
   TsAction,
   TsActionCreator,
 } from './create-action';
+export { default as createAsyncActions } from './create-async-actions';
 export {
   default as handleAction,
   Draft,

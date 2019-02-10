@@ -13,7 +13,7 @@ export interface TsActionCreator<P = void, A extends any[] = [P], M = void> {
 }
 
 export type PayloadCreator<P, A extends any[] = [P?]> = (...args: A) => P;
-const identity = <T extends any[]>(...arg: T): T[0] => arg[0];
+export const identity = <T extends any[]>(...arg: T): T[0] => arg[0];
 
 // eslint-disable-next-line arrow-parens
 export default <P, A extends any[] = [P?], M = void>(
