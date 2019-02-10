@@ -3,6 +3,7 @@ import {
   Draft,
   createDraft,
   finishDraft,
+  isDraftable,
 } from 'immer';
 import {
   // eslint-disable-next-line no-unused-vars
@@ -22,15 +23,19 @@ export default function handleAction<S, AC extends TsActionCreator<any> = any>(
 ): Reducer<S, ReturnType<AC>> {
   return (state: S | undefined, action: ReturnType<AC>) => {
     if (action.type === ac.type && state) {
-      const draft = createDraft(state);
-      const reResult = re(draft, action);
-      const finishedDraft = finishDraft(draft);
+      if (isDraftable(state)) {
+        const draft = createDraft(state);
+        const reResult = re(draft, action);
+        const finishedDraft = finishDraft(draft);
 
-      if (finishedDraft === state && reResult !== undefined) {
-        return reResult;
+        if (finishedDraft === state && reResult !== undefined) {
+          return reResult;
+        }
+
+        return finishedDraft;
       }
-
-      return finishedDraft;
+      // Support primitive-returning reducers
+      return re(state as Draft<S>, action);
     }
     return (state || s) as any;
   };

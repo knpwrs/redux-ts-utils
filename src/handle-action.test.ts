@@ -73,3 +73,11 @@ test('supports default state', () => {
   expect(newState1).toEqual({ baz: 0 });
   expect(newState1).toBe(state);
 });
+
+test('supports primitive state', () => {
+  const ac1 = createAction<void>('toUpperCase');
+  const state = 'foobarbaz';
+  const re = handleAction<string>(ac1, s => s.toUpperCase(), state);
+  const newState1 = re(state, ac1());
+  expect(newState1).toBe('FOOBARBAZ');
+});
