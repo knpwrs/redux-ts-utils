@@ -64,3 +64,12 @@ test('handles specific action and uses previous state if directly return value i
   expect(newState1).toEqual({ baz: 0 });
   expect(newState1).toBe(state);
 });
+
+test('supports default state', () => {
+  const ac1 = createAction<void>('foo6');
+  const state: { readonly baz: number } = { baz: 0 };
+  const re = handleAction<typeof state>(ac1, () => undefined, state);
+  const newState1 = re(undefined, { type: '@@redux/INIT' });
+  expect(newState1).toEqual({ baz: 0 });
+  expect(newState1).toBe(state);
+});
