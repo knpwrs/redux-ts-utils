@@ -111,18 +111,18 @@ The action creator function will be typed to take whatever you provide as a
 payload type.
 
 If your action creator needs to take arguments other than whatever your payload
-is typed as you can provide types in the generic signature:
+is typed as you can simply provide a typed payload creator function:
 
 ```ts
-// a, b, and c are inferred below:
-const addThreeNumbers = createAction<number, [number, number, number]>('ADD_THREE_NUMBERS', (a, b, c) => a + b + c);
+// addThreeNumbers accepts three ordinal number aguments and has a number payload:
+const addThreeNumbers = createAction('ADD_THREE_NUMBERS', (a: number, b: number, c: number) => a + b + c);
 ```
 
 If you need to customize the [SFP] `meta` property you can supply a second meta
-customizer function:
+creator function:
 
 ```ts
-const addThreeNumbers = createAction<number, [number, number, number], number>(
+const addThreeNumbers = createAction<number, [number, number, number], string>(
   'ADD_THREE_NUMBERS',
   // Create `payload`
   (a, b, c) => a + b + c,
@@ -130,6 +130,11 @@ const addThreeNumbers = createAction<number, [number, number, number], number>(
   (a, b, c) => `${a} + ${b} + ${c}`,
 );
 ```
+
+Note that the payload and meta creators must accept the same arguments, but can
+return different types. In the example above the payload creator takes three
+numbers and returns a number while the meta creator takes three numbers and
+returns a string.
 
 ### `handleAction(actionCreator, (state: Draft<State>, payload) => void, initialState?: State)`
 

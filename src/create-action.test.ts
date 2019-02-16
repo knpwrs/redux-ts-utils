@@ -63,6 +63,31 @@ test('meta customizer', () => {
   });
 });
 
+test('generic inference', () => {
+  const ac = createAction('generic-inference', (a: number, b: number, c: number) => a + b + c);
+  expect(ac.type).toBe('generic-inference');
+  expect(ac(1, 2, 3)).toEqual({
+    type: 'generic-inference',
+    payload: 6,
+  });
+});
+
+test('generic inference with meta', () => {
+  const ac = createAction<number, [number, number, number], string>(
+    'generic-inference-with-meta',
+    // Create `payload`
+    (a, b, c) => a + b + c,
+    // Create `meta`
+    (a, b, c) => `${a} + ${b} + ${c}`,
+  );
+  expect(ac.type).toBe('generic-inference-with-meta');
+  expect(ac(1, 2, 3)).toEqual({
+    type: 'generic-inference-with-meta',
+    payload: 6,
+    meta: '1 + 2 + 3',
+  });
+});
+
 test('error payload', () => {
   const ac = createAction<Error>('with-error');
   expect(ac.type).toBe('with-error');
