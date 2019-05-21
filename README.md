@@ -21,8 +21,8 @@ import { createAction, handleAction, reduceReducers } from 'redux-ts-utils';
 
 // Actions
 
-const increment = createAction<void>('increment');
-const decrement = createAction<void>('decrement');
+const increment = createAction('increment');
+const decrement = createAction('decrement');
 const add = createAction<number>('add');
 const override = createAction<number>('override');
 
@@ -62,7 +62,11 @@ store.dispatch(increment());
 store.dispatch(increment());
 store.dispatch(increment());
 store.dispatch(decrement());
+// store.dispatch(decrement(1)); <-- TypeError: Expected 0 arguments, but got 1.
+
 store.dispatch(add(10));
+// store.dispatch(add()); <-- TypeError: Expected 1 arguments, but got 0.
+
 console.log('Final count!', store.getState().counter); // 12
 ```
 
@@ -104,7 +108,9 @@ properties: `type` (a `string`) and `payload` (typed as `T`).
 Typically it is best to use the simplest signature for this function:
 
 ```ts
-const myActionCreator = createAction<MyActionPayload>('MY_ACTION');
+const myVoidActionCreator = createAction('MY_VOID_ACTION');
+
+const myPayloadActionCreator = createAction<MyActionPayload>('MY_PAYLOAD_ACTION');
 ```
 
 The action creator function will be typed to take whatever you provide as a

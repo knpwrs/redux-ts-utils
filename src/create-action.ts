@@ -11,16 +11,32 @@ export interface TsActionCreator<P = void, A extends any[] = [P], M = void> {
   (...args: A): TsAction<P, M>;
   type: string;
 }
+interface TsIdentityPayloadActionCreator<P> {
+  (payload: P): TsAction<P, void>;
+  type: string;
+}
+interface TsVoidActionCreator {
+  (): TsAction<void, void>;
+  type: string;
+}
 
 export type PayloadCreator<P, A extends any[] = [P?]> = (...args: A) => P;
 export const identity = <T extends any[]>(...arg: T): T[0] => arg[0];
 
-// eslint-disable-next-line arrow-parens
-export default <P, A extends any[] = [P?], M = void>(
+
+function createAction(type: string): TsVoidActionCreator;
+function createAction<P>(type: string): TsIdentityPayloadActionCreator<P>;
+function createAction<P, A extends any[] = [P?], M = void>(
+  type: string,
+  pc: PayloadCreator<P, A>,
+  mc?: PayloadCreator<M, A>,
+): TsActionCreator<P, A, M>;
+
+function createAction <P, A extends any[] = [P?], M = void>(
   type: string,
   pc: PayloadCreator<P, A> = identity,
   mc?: PayloadCreator<M, A>,
-): TsActionCreator<P, A, M> => {
+): TsVoidActionCreator | TsIdentityPayloadActionCreator<P> | TsActionCreator<P, A, M> {
   // Continue with creating an action creator
   const ac = (...args: A): TsAction<P, M> => {
     const payload = pc(...args);
@@ -42,4 +58,6 @@ export default <P, A extends any[] = [P?], M = void>(
   ac.toString = () => type;
 
   return ac as TsActionCreator<P, A, M>;
-};
+}
+
+export default createAction;
