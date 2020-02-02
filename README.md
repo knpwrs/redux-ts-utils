@@ -1,3 +1,9 @@
+# DEPRECATION NOTICE
+
+There is now an official library called [`@reduxjs/toolkit`] which does
+everything this library set out to solve and more! I have decided to deprecate
+`redux-ts-utils` in favor of [`@reduxjs/toolkit`].
+
 # redux-ts-utils
 
 [![Dependency Status](https://img.shields.io/david/knpwrs/redux-ts-utils.svg)](https://david-dm.org/knpwrs/redux-ts-utils)
@@ -260,6 +266,7 @@ Even with this particular distinction, the actions created by this library are
 **MIT**
 
 [FSA]: https://github.com/redux-utilities/flux-standard-action
+[`@reduxjs/toolkit`]: https://www.npmjs.com/package/@reduxjs/toolkit
 [`immer`]: https://github.com/mweststrate/immer "Create the next immutable state by mutating the current one"
 [`redux-starter-kit`]: https://www.npmjs.com/package/redux-starter-kit
 [cs]: https://codesandbox.io/s/github/knpwrs/redux-ts-utils-example-app
