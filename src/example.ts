@@ -5,8 +5,8 @@ import { createAction, handleAction, reduceReducers } from '.';
 
 // Actions
 
-const increment = createAction<void>('increment');
-const decrement = createAction<void>('decrement');
+const increment = createAction('increment');
+const decrement = createAction('decrement');
 const add = createAction<number>('add');
 const override = createAction<number>('override');
 
@@ -46,7 +46,11 @@ store.dispatch(increment());
 store.dispatch(increment());
 store.dispatch(increment());
 store.dispatch(decrement());
+// store.dispatch(decrement(1)); <-- TypeError: Expected 0 arguments, but got 1.
+
 store.dispatch(add(10));
+// store.dispatch(add()); <-- TypeError: Expected 1 arguments, but got 0.
+
 console.log('Final count!', store.getState().counter);
 
 assert(store.getState().counter === 12);
